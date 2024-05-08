@@ -28,12 +28,15 @@ void loop() {
   eak.ledOff(32);
   eak.ledOn(21);  // Menyalakan LED pada pin 18
   delay(eakvalue);
+  eaktemp = analogRead(eakpotpin);
   eak.ledOff(21);
   eak.ledOn(26);  // Mematikan LED pada pin 19
   delay(eakvalue);
+  eaktemp = analogRead(eakpotpin);
   eak.ledOff(26);
   eak.ledOn(27);   // Menyalakan LED pada pin 21
   delay(eakvalue);
+  eaktemp = analogRead(eakpotpin);
   eak.ledOff(27);
   eak.ledOn(32);  // Mematikan LED pada pin 27
   delay(eakvalue);
