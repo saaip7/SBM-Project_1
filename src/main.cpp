@@ -1,9 +1,14 @@
 #include <esp32-hal-gpio.h>
 #include "EAK.h"
+#include <Arduino.h>
 
 EAK eak;
+int eakvalue = 0;
+int eakpotpin = 33;
+float eaktemp = 0;
 
 void setup() {
+  Serial.begin(9600);
   // pinMode(18, OUTPUT);
   // pinMode(19, OUTPUT);
   // pinMode(21, OUTPUT);
@@ -16,14 +21,23 @@ void setup() {
 
 // Fungsi untuk memutar loop
 void loop() {
-  eak.ledOn(21);   // Menyalakan LED pada pin 18
-  eak.ledOff(26);  // Mematikan LED pada pin 19
+  eaktemp = analogRead(eakpotpin);
+  Serial.println(analogRead(eakpotpin));
+  eaktemp = eaktemp/4095*300 + 20;
+  eakvalue = eaktemp;
+  eak.ledOff(32);
+  eak.ledOn(21);  // Menyalakan LED pada pin 18
+  delay(eakvalue);
+  eak.ledOff(21);
+  eak.ledOn(26);  // Mematikan LED pada pin 19
+  delay(eakvalue);
+  eak.ledOff(26);
   eak.ledOn(27);   // Menyalakan LED pada pin 21
-  eak.ledOff(32);  // Mematikan LED pada pin 27
-  delay(100);  // Tunggu 100 milidetik
-  eak.ledOff(21);  // Mematikan LED pada pin 18
-  eak.ledOn(26);   // Menyalakan LED pada pin 19
-  eak.ledOff(27);  // Mematikan LED pada pin 21
-  eak.ledOn(32);   // Menyalakan LED pada pin 27
-  delay(100);  // Tunggu 100 milidetik
+  delay(eakvalue);
+  eak.ledOff(27);
+  eak.ledOn(32);  // Mematikan LED pada pin 27
+  delay(eakvalue);
+
+  
+
 }
