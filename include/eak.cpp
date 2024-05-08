@@ -10,3 +10,8 @@ void ledOn(int pin) {
 void ledOff(int pin) {
   digitalWrite(pin, LOW);
 }
+
+// Fungsi untuk menginisialisasi pin
+void pinUsed(int pin) {
+  pinMode(pin, OUTPUT);
+}
