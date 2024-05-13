@@ -23,24 +23,7 @@ void setup() {
 void loop() {
   eaktemp = analogRead(eakpotpin);
   Serial.println(analogRead(eakpotpin));
-  eaktemp = eaktemp/4095*300 + 20;
+  eaktemp = 320 - eaktemp/4095*300 + 20;
   eakvalue = eaktemp;
-  eak.ledOff(32);
-  eak.ledOn(21);  // Menyalakan LED pada pin 18
-  delay(eakvalue);
-  eaktemp = analogRead(eakpotpin);
-  eak.ledOff(21);
-  eak.ledOn(26);  // Mematikan LED pada pin 19
-  delay(eakvalue);
-  eaktemp = analogRead(eakpotpin);
-  eak.ledOff(26);
-  eak.ledOn(27);   // Menyalakan LED pada pin 21
-  delay(eakvalue);
-  eaktemp = analogRead(eakpotpin);
-  eak.ledOff(27);
-  eak.ledOn(32);  // Mematikan LED pada pin 27
-  delay(eakvalue);
-
-  
-
+  eak.sequence(32, 21, 26, 27, eakvalue);
 }
