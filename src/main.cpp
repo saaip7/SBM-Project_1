@@ -1,29 +1,15 @@
-#include <esp32-hal-gpio.h>
-#include "EAK.h"
-#include <Arduino.h>
+#include "sbm_athar_syaif.h"
 
-EAK eak;
-int eakvalue = 0;
-int eakpotpin = 33;
-float eaktemp = 0;
+int potPin = 33;
 
 void setup() {
-  Serial.begin(9600);
-  // pinMode(18, OUTPUT);
-  // pinMode(19, OUTPUT);
-  // pinMode(21, OUTPUT);
-  // pinMode(27, OUTPUT);
-  eak.pinUsed(21);
-  eak.pinUsed(26);
-  eak.pinUsed(27);
-  eak.pinUsed(32);
+  pinUsed(21);
+  pinUsed(26);
+  pinUsed(27);
+  pinUsed(32);
 }
 
 // Fungsi untuk memutar loop
 void loop() {
-  eaktemp = analogRead(eakpotpin);
-  Serial.println(analogRead(eakpotpin));
-  eaktemp = 320 - eaktemp/4095*300 + 20;
-  eakvalue = eaktemp;
-  eak.sequence(32, 21, 26, 27, eakvalue);
+  sequence(27, 32, 21, 26, potensioLED(potPin));
 }

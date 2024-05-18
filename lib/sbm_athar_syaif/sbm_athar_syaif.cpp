@@ -1,23 +1,23 @@
+#include "sbm_athar_syaif.h"
 #include <esp32-hal-gpio.h>
-#include "EAK.h"
 
-EAK::EAK() {}
+
 // Fungsi untuk menyalakan LED pada pin tertentu
-void EAK::ledOn(int pin) {
+void ledOn(int pin) {
   digitalWrite(pin, HIGH);
 }
 
 // Fungsi untuk mematikan LED pada pin tertentu
-void EAK::ledOff(int pin) {
+void ledOff(int pin) {
   digitalWrite(pin, LOW);
 }
 
 // Fungsi untuk menginisialisasi pin
-void EAK::pinUsed(int pin) {
+void pinUsed(int pin) {
   pinMode(pin, OUTPUT);
 }
 
-void EAK::sequence(int ledpin1, int ledpin2, int ledpin3, int ledpin4, int delaytime) {
+void sequence(int ledpin1, int ledpin2, int ledpin3, int ledpin4, int delaytime) {
   ledOff(ledpin1);
   ledOn(ledpin2);  // Menyalakan LED pada pin 18
   delay(delaytime);
@@ -33,4 +33,14 @@ void EAK::sequence(int ledpin1, int ledpin2, int ledpin3, int ledpin4, int delay
   ledOff(ledpin4);
   ledOn(ledpin1);  // Mematikan LED pada pin 27
   delay(delaytime);
+}
+
+int potensioLED(int potPin) {
+    int potValue = 0;
+    float potTemp = 0;
+    potTemp = analogRead(potPin);
+    potTemp = 320 - potTemp/4095*300 + 20;
+    potValue = potTemp;
+    
+    return potValue;
 }
